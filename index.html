@@ -1,10 +1,495 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+    <title>Clean Water Updated S.A.S. | Soluciones integrales</title>
+
+    <meta
+            name="description"
+            content="Clean Water Updated S.A.S. ofrece soluciones integrales en agua, climatización, sistemas eléctricos, saneamiento básico, gestión ambiental y obras civiles."
+    />
+
+    <link rel="stylesheet" href="styles.css" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+            href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap"
+            rel="stylesheet"
+    />
+
+    <script
+            src="https://kit.fontawesome.com/8d6f76c1c8.js"
+            crossorigin="anonymous"
+    ></script>
+</head>
+
+<body>
+<!-- TOP BAR -->
+<header class="top-bar">
+    <div class="container top-bar-content">
+        <div class="top-left">
+            <span><i class="fa-solid fa-envelope"></i> cwaterup@gmail.com</span>
+            <span><i class="fa-solid fa-phone"></i> 321 961 9924</span>
+            <span>Soluciones integrales para el agua, el ambiente y la infraestructura técnica.</span>
+        </div>
+
+        <div class="top-right">
+            <a href="https://wa.me/573219619924" target="_blank">
+                <i class="fa-brands fa-whatsapp"></i> WhatsApp
+            </a>
+            <a href="#contacto">
+                <i class="fa-solid fa-file-signature"></i> Solicitar cotización
+            </a>
+        </div>
+    </div>
+</header>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+    <div class="container nav-content">
+        <a href="#inicio" class="logo-box">
+            <img src="assets/logo.png" alt="Clean Water Updated S.A.S." />
+        </a>
+
+        <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú">
+            <i class="fa-solid fa-bars"></i>
+        </button>
+
+        <ul class="nav-menu" id="navMenu">
+            <li><a href="#inicio" class="active">Inicio</a></li>
+            <li><a href="#nosotros">¿Quiénes somos?</a></li>
+            <li><a href="#servicios">Servicios</a></li>
+            <li><a href="#gestion">Gestión ambiental</a></li>
+            <li><a href="#clientes">Clientes</a></li>
+            <li><a href="#galeria">Galería</a></li>
+            <li><a href="#contacto">Contacto</a></li>
+            <li>
+                <a href="#contacto" class="btn-nav">
+                    <i class="fa-solid fa-file-lines"></i> Solicitar cotización
+                </a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<!-- HERO -->
+<main>
+    <section class="hero" id="inicio">
+        <button class="slider-arrow left" aria-label="Anterior">
+            <i class="fa-solid fa-chevron-left"></i>
+        </button>
+
+        <div class="container hero-content">
+            <div class="hero-text">
+                <h1>
+                    Soluciones integrales en
+                    <span>agua, climatización y saneamiento</span>
+                </h1>
+
+                <p>
+                    Atendemos al sector público y privado con servicios especializados
+                    en mantenimiento de aires acondicionados, tratamiento de agua,
+                    sistemas eléctricos, saneamiento básico y soporte ambiental.
+                </p>
+
+                <div class="hero-actions">
+                    <a href="#servicios" class="btn primary">
+                        Conoce nuestros servicios
+                    </a>
+
+                    <a href="#contacto" class="btn secondary">
+                        Solicita tu cotización
+                    </a>
+                </div>
+            </div>
+
+            <div class="hero-visual">
+                <img src="assets/hero.jpg" alt="Planta de tratamiento de agua" />
+            </div>
+        </div>
+
+        <button class="slider-arrow right" aria-label="Siguiente">
+            <i class="fa-solid fa-chevron-right"></i>
+        </button>
+
+        <div class="slider-dots">
+            <span class="dot active"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+        </div>
+    </section>
+
+    <!-- FEATURE CARDS -->
+    <section class="featured-services">
+        <div class="container featured-grid">
+            <article class="feature-card">
+                <img src="assets/aire-acondicionado.jpg" alt="Aire acondicionado" />
+                <div class="feature-icon blue">
+                    <i class="fa-solid fa-fan"></i>
+                </div>
+                <div>
+                    <h3>Aire acondicionado y ventilación</h3>
+                    <a href="#servicios">Ver más <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+            </article>
+
+            <article class="feature-card">
+                <img src="assets/tratamiento-agua.jpg" alt="Tratamiento de agua" />
+                <div class="feature-icon blue">
+                    <i class="fa-solid fa-droplet"></i>
+                </div>
+                <div>
+                    <h3>Tratamiento de agua</h3>
+                    <a href="#servicios">Ver más <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+            </article>
+
+            <article class="feature-card">
+                <img src="assets/gestion-ambiental.jpg" alt="Gestión ambiental" />
+                <div class="feature-icon green">
+                    <i class="fa-solid fa-leaf"></i>
+                </div>
+                <div>
+                    <h3>Gestión ambiental</h3>
+                    <a href="#gestion">Ver más <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+            </article>
+
+            <article class="feature-card">
+                <img src="assets/obras-civiles.jpg" alt="Obras civiles" />
+                <div class="feature-icon blue">
+                    <i class="fa-solid fa-pipe-valve"></i>
+                </div>
+                <div>
+                    <h3>Obras civiles y saneamiento</h3>
+                    <a href="#servicios">Ver más <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <!-- SERVICES -->
+    <section class="services-section" id="servicios">
+        <div class="container">
+            <div class="section-title">
+                <h2>Nuestros servicios</h2>
+                <span></span>
+            </div>
+
+            <div class="services-grid">
+                <article class="service-card">
+                    <div class="service-icon">
+                        <i class="fa-solid fa-screwdriver-wrench"></i>
+                    </div>
+                    <h3>Mantenimiento preventivo y correctivo</h3>
+                    <p>
+                        Servicio técnico para equipos de aire acondicionado y ventilación
+                        mecánica.
+                    </p>
+                    <a href="#contacto">Ver más</a>
+                </article>
+
+                <article class="service-card">
+                    <div class="service-icon">
+                        <i class="fa-solid fa-wind"></i>
+                    </div>
+                    <h3>Instalación y puesta en marcha</h3>
+                    <p>
+                        Instalación de aires acondicionados y sistemas de ventilación
+                        para diferentes espacios.
+                    </p>
+                    <a href="#contacto">Ver más</a>
+                </article>
+
+                <article class="service-card">
+                    <div class="service-icon">
+                        <i class="fa-solid fa-industry"></i>
+                    </div>
+                    <h3>Diseño y montaje de plantas</h3>
+                    <p>
+                        Diseño, construcción y montaje de plantas de tratamiento de aguas
+                        residuales y potables.
+                    </p>
+                    <a href="#contacto">Ver más</a>
+                </article>
+
+                <article class="service-card">
+                    <div class="service-icon">
+                        <i class="fa-solid fa-water"></i>
+                    </div>
+                    <h3>Operación de PTARD, PTARI, PTAP y PTALL</h3>
+                    <p>
+                        Operación de plantas de tratamiento domésticas, industriales,
+                        potabilización y aguas lluvias.
+                    </p>
+                    <a href="#contacto">Ver más</a>
+                </article>
+
+                <article class="service-card">
+                    <div class="service-icon">
+                        <i class="fa-solid fa-flask"></i>
+                    </div>
+                    <h3>Suministro de insumos químicos</h3>
+                    <p>
+                        Insumos químicos para sistemas de tratamiento de aguas y procesos
+                        complementarios.
+                    </p>
+                    <a href="#contacto">Ver más</a>
+                </article>
+
+                <article class="service-card">
+                    <div class="service-icon">
+                        <i class="fa-solid fa-clipboard-check"></i>
+                    </div>
+                    <h3>Trámites y permisos ambientales</h3>
+                    <p>
+                        Asesoría y acompañamiento en permisos, planes ambientales y
+                        requerimientos ante autoridades.
+                    </p>
+                    <a href="#gestion">Ver más</a>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- TECHNICAL BANNER -->
+    <section class="technical-banner" id="nosotros">
+        <div class="container technical-content">
+            <div class="technical-text">
+                <h2>Atención y asesoría técnica</h2>
+                <p>
+                    Brindamos acompañamiento técnico especializado, diagnóstico de
+                    sistemas, cotizaciones personalizadas y apoyo en la ejecución de
+                    proyectos para entidades públicas, empresas privadas, centros
+                    empresariales, conjuntos residenciales e industria.
+                </p>
+                <a href="#contacto" class="btn dark">Solicitar asesoría</a>
+            </div>
+
+            <div class="technical-image">
+                <img src="assets/asesoria-tecnica.jpg" alt="Asesoría técnica Clean Water" />
+            </div>
+        </div>
+    </section>
+
+    <!-- QUICK ACCESS -->
+    <section class="quick-access" id="galeria">
+        <div class="container quick-grid">
+            <article class="quick-card">
+                <img src="assets/contacto.jpg" alt="Formulario de contacto" />
+                <div>
+            <span class="quick-icon blue">
+              <i class="fa-solid fa-user"></i>
+            </span>
+                    <h3>Formulario de contacto</h3>
+                    <a href="#contacto">Ver más</a>
+                </div>
+            </article>
+
+            <article class="quick-card">
+                <img src="assets/brochure-img.jpg" alt="Brochure corporativo" />
+                <div>
+            <span class="quick-icon green">
+              <i class="fa-solid fa-file-lines"></i>
+            </span>
+                    <h3>Brochure corporativo</h3>
+                    <a href="assets/brochure.pdf" target="_blank">Ver más</a>
+                </div>
+            </article>
+
+            <article class="quick-card">
+                <img src="assets/proyectos.jpg" alt="Proyectos realizados" />
+                <div>
+            <span class="quick-icon blue">
+              <i class="fa-solid fa-image"></i>
+            </span>
+                    <h3>Proyectos realizados</h3>
+                    <a href="#servicios">Ver más</a>
+                </div>
+            </article>
+
+            <article class="quick-card" id="clientes">
+                <img src="assets/clientes.jpg" alt="Nuestros clientes" />
+                <div>
+            <span class="quick-icon green">
+              <i class="fa-solid fa-users"></i>
+            </span>
+                    <h3>Nuestros clientes</h3>
+                    <a href="#clientes-logos">Ver más</a>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <!-- CLIENT LOGOS -->
+    <section class="clients-strip" id="clientes-logos">
+        <div class="container clients-logos">
+            <span>CALYPSO</span>
+            <span>CALIMA</span>
+            <span>PRADOS DEL ESTE</span>
+            <span>TYFA</span>
+            <span>MOTOMART S.A.</span>
+            <span>SAN ISIDRO</span>
+            <span>SUMMAR</span>
+        </div>
+    </section>
+
+    <!-- ENVIRONMENTAL MANAGEMENT -->
+    <section class="environment-section" id="gestion">
+        <div class="container environment-content">
+            <div>
+                <h2>Gestión ambiental</h2>
+                <p>
+                    Acompañamos procesos de trámite ante autoridades ambientales,
+                    corporaciones autónomas regionales y entidades nacionales.
+                </p>
+            </div>
+
+            <div class="environment-list">
+                <span><i class="fa-solid fa-check"></i> Permisos de vertimiento</span>
+                <span><i class="fa-solid fa-check"></i> Planes de manejo ambiental</span>
+                <span><i class="fa-solid fa-check"></i> Estudios de impacto ambiental</span>
+                <span><i class="fa-solid fa-check"></i> Permisos de reúso del agua</span>
+                <span><i class="fa-solid fa-check"></i> Asesoría y acompañamiento</span>
+                <span><i class="fa-solid fa-check"></i> Respuesta a requerimientos</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="contact-section" id="contacto">
+        <div class="container contact-grid">
+            <div class="contact-info">
+                <h2>Solicita tu cotización</h2>
+                <p>
+                    Cuéntanos qué servicio necesitas y nuestro equipo se pondrá en
+                    contacto contigo.
+                </p>
+
+                <div class="contact-item">
+                    <i class="fa-solid fa-phone"></i>
+                    <span>321 961 9924</span>
+                </div>
+
+                <div class="contact-item">
+                    <i class="fa-solid fa-envelope"></i>
+                    <span>cwaterup@gmail.com</span>
+                </div>
+
+                <div class="contact-item">
+                    <i class="fa-solid fa-location-dot"></i>
+                    <span>Bogotá D.C., Colombia</span>
+                </div>
+
+                <a href="https://wa.me/573219619924" target="_blank" class="btn primary">
+                    Escribir por WhatsApp
+                </a>
+            </div>
+
+            <form class="contact-form">
+                <input type="text" placeholder="Nombre completo" required />
+                <input type="email" placeholder="Correo electrónico" required />
+                <input type="tel" placeholder="Teléfono" required />
+
+                <select required>
+                    <option value="">Servicio de interés</option>
+                    <option>Aire acondicionado y ventilación</option>
+                    <option>Tratamiento de agua</option>
+                    <option>Sistemas eléctricos</option>
+                    <option>Saneamiento básico</option>
+                    <option>Gestión ambiental</option>
+                    <option>Obras civiles</option>
+                </select>
+
+                <textarea placeholder="Cuéntanos tu necesidad" rows="5"></textarea>
+
+                <button type="submit">
+                    <i class="fa-solid fa-paper-plane"></i> Enviar mensaje
+                </button>
+            </form>
+        </div>
+    </section>
+</main>
+
+<!-- FOOTER -->
+<footer class="footer">
+    <div class="container footer-grid">
+        <div>
+            <img src="assets/logo.png" alt="Clean Water Updated S.A.S." class="footer-logo" />
+            <p>
+                Soluciones integrales para el agua, el ambiente y la infraestructura
+                técnica.
+            </p>
+
+            <div class="socials">
+                <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
+                <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                <a href="#"><i class="fa-brands fa-youtube"></i></a>
+            </div>
+        </div>
+
+        <div>
+            <h4>Contacto</h4>
+            <p><i class="fa-solid fa-envelope"></i> cwaterup@gmail.com</p>
+            <p><i class="fa-solid fa-phone"></i> 321 961 9924</p>
+            <p><i class="fa-solid fa-location-dot"></i> Bogotá D.C., Colombia</p>
+        </div>
+
+        <div>
+            <h4>Servicios</h4>
+            <ul>
+                <li>Aire acondicionado y ventilación</li>
+                <li>Tratamiento de agua</li>
+                <li>Gestión ambiental</li>
+                <li>Obras civiles y saneamiento</li>
+                <li>Sistemas eléctricos</li>
+            </ul>
+        </div>
+
+        <div>
+            <h4>Enlaces de interés</h4>
+            <ul>
+                <li><a href="#nosotros">¿Quiénes somos?</a></li>
+                <li><a href="#clientes">Clientes</a></li>
+                <li><a href="#galeria">Galería</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+                <li><a href="#">Política de privacidad</a></li>
+            </ul>
+        </div>
+
+        <div>
+            <h4>Ubicación</h4>
+            <p><i class="fa-solid fa-location-dot"></i> Bogotá D.C., Colombia</p>
+            <p><i class="fa-regular fa-clock"></i> Lunes a viernes</p>
+            <p>8:00 a.m. a 5:30 p.m.</p>
+        </div>
+    </div>
+
+    <div class="footer-bottom">
+        <p>© 2026 Clean Water Updated S.A.S. Todos los derechos reservados.</p>
+    </div>
+</footer>
+
+<!-- WHATSAPP FLOAT -->
+<a
+        href="https://wa.me/573219619924"
+        class="whatsapp-float"
+        target="_blank"
+        aria-label="WhatsApp Clean Water"
+>
+    <i class="fa-brands fa-whatsapp"></i>
+</a>
+
+<!-- BACK TO TOP -->
+<button class="back-to-top" id="backToTop" aria-label="Volver arriba">
+    <i class="fa-solid fa-chevron-up"></i>
+</button>
+
+<script src="script.js"></script>
 </body>
 </html>
