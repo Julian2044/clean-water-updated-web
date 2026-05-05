@@ -1,9 +1,18 @@
 document.addEventListener("DOMContentLoaded", () => {
     const views = document.querySelectorAll(".view");
-    const viewLinks = document.querySelectorAll("[data-view-link]");
     const navMenu = document.getElementById("navMenu");
     const menuToggle = document.getElementById("menuToggle");
     const backToTop = document.getElementById("backToTop");
+
+    const validViews = [
+        "inicio",
+        "nosotros",
+        "servicios",
+        "tramites",
+        "clientes",
+        "galeria",
+        "contacto"
+    ];
 
     renderServices();
     renderEnvironmentalProcesses();
@@ -11,23 +20,28 @@ document.addEventListener("DOMContentLoaded", () => {
     renderGallery();
 
     const initialView = getInitialView();
-    showView(initialView);
+    showView(initialView, false);
 
-    viewLinks.forEach((link) => {
-        link.addEventListener("click", (event) => {
-            const viewName = link.getAttribute("data-view-link");
+    // Navegación por vistas
+    document.addEventListener("click", (event) => {
+        const link = event.target.closest("[data-view-link]");
 
-            if (!viewName) return;
+        if (!link) return;
 
-            event.preventDefault();
-            showView(viewName);
+        const viewName = link.getAttribute("data-view-link");
 
-            if (navMenu && navMenu.classList.contains("active")) {
-                closeMobileMenu();
-            }
-        });
+        if (!viewName || !validViews.includes(viewName)) return;
+
+        event.preventDefault();
+
+        showView(viewName);
+
+        if (navMenu && navMenu.classList.contains("active")) {
+            closeMobileMenu();
+        }
     });
 
+    // Menú responsive
     if (menuToggle && navMenu) {
         menuToggle.addEventListener("click", () => {
             navMenu.classList.toggle("active");
@@ -46,19 +60,21 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
+    // Botón volver al inicio
     if (backToTop) {
         backToTop.addEventListener("click", () => {
             showView("inicio");
         });
     }
 
+    // Formulario de contacto
     const contactForm = document.getElementById("contactForm");
 
     if (contactForm) {
         contactForm.addEventListener("submit", handleContactForm);
     }
 
-    function showView(viewName) {
+    function showView(viewName, updateUrl = true) {
         views.forEach((view) => {
             const currentView = view.getAttribute("data-view");
 
@@ -77,17 +93,18 @@ document.addEventListener("DOMContentLoaded", () => {
             behavior: "smooth"
         });
 
-        history.replaceState(null, "", `#${viewName}`);
+        if (updateUrl) {
+            history.replaceState(null, "", `#${viewName}`);
+        }
     }
 
     function updateActiveMenu(viewName) {
-        viewLinks.forEach((link) => {
+        const navLinks = document.querySelectorAll(".nav-link");
+
+        navLinks.forEach((link) => {
             link.classList.remove("active");
 
-            if (
-                link.classList.contains("nav-link") &&
-                link.getAttribute("data-view-link") === viewName
-            ) {
+            if (link.getAttribute("data-view-link") === viewName) {
                 link.classList.add("active");
             }
         });
@@ -104,6 +121,8 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     function closeMobileMenu() {
+        if (!navMenu || !menuToggle) return;
+
         navMenu.classList.remove("active");
 
         const icon = menuToggle.querySelector("i");
@@ -116,16 +135,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function getInitialView() {
         const hash = window.location.hash.replace("#", "");
-
-        const validViews = [
-            "inicio",
-            "nosotros",
-            "servicios",
-            "tramites",
-            "clientes",
-            "galeria",
-            "contacto"
-        ];
 
         if (validViews.includes(hash)) {
             return hash;
@@ -144,13 +153,19 @@ document.addEventListener("DOMContentLoaded", () => {
                 return `
                     <article class="service-card">
                         <div class="service-image">
-                            <img src="${service.image}" alt="${service.title}">
+                            <img
+                                src="${service.image}"
+                                alt="${service.title}"
+                                loading="lazy"
+                            >
                         </div>
 
                         <div class="service-content">
                             <div class="service-icon ${service.color}">
                                 <i class="${service.icon}"></i>
                             </div>
+
+                            <span class="service-number">${service.number}</span>
 
                             <h3>${service.title}</h3>
 
@@ -165,8 +180,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 `;
             })
             .join("");
-
-        bindDynamicViewLinks();
     }
 
     function renderEnvironmentalProcesses() {
@@ -193,10 +206,21 @@ document.addEventListener("DOMContentLoaded", () => {
 
         clientsGrid.innerHTML = cleanWaterData.clients
             .map((client) => {
+                const initials = getClientInitials(client.name);
+
                 return `
                     <article class="client-card">
-                        <div class="client-logo-placeholder">
-                            ${getClientInitials(client.name)}
+                        <div class="client-logo-box">
+                            <img
+                                src="${client.logo}"
+                                alt="${client.name}"
+                                loading="lazy"
+                                onerror="this.style.display='none'; this.nextElementSibling.style.display='grid';"
+                            >
+
+                            <span class="client-fallback">
+                                ${initials}
+                            </span>
                         </div>
 
                         <h3>${client.name}</h3>
@@ -216,7 +240,11 @@ document.addEventListener("DOMContentLoaded", () => {
             .map((item) => {
                 return `
                     <article class="gallery-card">
-                        <img src="${item.image}" alt="${item.title}">
+                        <img
+                            src="${item.image}"
+                            alt="${item.title}"
+                            loading="lazy"
+                        >
 
                         <div class="gallery-overlay">
                             <span>${item.category}</span>
@@ -226,25 +254,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 `;
             })
             .join("");
-    }
-
-    function bindDynamicViewLinks() {
-        const dynamicLinks = document.querySelectorAll("[data-view-link]");
-
-        dynamicLinks.forEach((link) => {
-            if (link.dataset.bound === "true") return;
-
-            link.dataset.bound = "true";
-
-            link.addEventListener("click", (event) => {
-                const viewName = link.getAttribute("data-view-link");
-
-                if (!viewName) return;
-
-                event.preventDefault();
-                showView(viewName);
-            });
-        });
     }
 
     function handleContactForm(event) {
@@ -284,10 +293,14 @@ Mensaje: ${message || "No especificado"}
     }
 
     function getClientInitials(name) {
-        const words = name
+        const cleanName = name
             .replace("Centro Empresarial", "")
             .replace("S.A.", "")
-            .trim()
+            .replace("S.A.S.", "")
+            .replace(".", "")
+            .trim();
+
+        const words = cleanName
             .split(" ")
             .filter(Boolean);
 
