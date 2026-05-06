@@ -26,7 +26,7 @@ const cleanWaterData = {
             number: "01",
             icon: "fa-solid fa-fan",
             color: "blue",
-            image: "assets/images/climatizacion.jpg",
+            image: "assets/images/servicio-01.jpg",
             description: "Mantenimiento, preventivo y correctivo de equipos de aire acondicionado y ventilación mecánica."
         },
         {
@@ -34,7 +34,7 @@ const cleanWaterData = {
             number: "02",
             icon: "fa-solid fa-screwdriver-wrench",
             color: "green",
-            image: "assets/images/climatizacion.jpg",
+            image: "assets/images/servicio-02.jpg",
             description: "Instrucciones de aire acondicionado y puesta en marcha."
         },
         {
@@ -42,7 +42,7 @@ const cleanWaterData = {
             number: "03",
             icon: "fa-solid fa-wind",
             color: "blue",
-            image: "assets/images/climatizacion.jpg",
+            image: "assets/images/servicio-03.jpg",
             description: "Instalación de aires acondicionados y ventilación mecánica."
         },
         {
@@ -50,7 +50,7 @@ const cleanWaterData = {
             number: "04",
             icon: "fa-solid fa-industry",
             color: "green",
-            image: "assets/images/tratamiento-agua.jpg",
+            image: "assets/images/servicio-04.jpg",
             description: "Diseño, construcción y montaje de plantas de tratamiento de aguas residuales y potables."
         },
         {
@@ -58,7 +58,7 @@ const cleanWaterData = {
             number: "05",
             icon: "fa-solid fa-droplet",
             color: "blue",
-            image: "assets/images/tratamiento-agua.jpg",
+            image: "assets/images/servicio-05.jpg",
             description: "Operación de plantas de tratamiento de aguas residuales domésticas e industriales, potabilización y aguas lluvias (PTARD PTARI, PTAP Y PTALL)."
         },
         {
@@ -66,7 +66,7 @@ const cleanWaterData = {
             number: "06",
             icon: "fa-solid fa-recycle",
             color: "green",
-            image: "assets/images/saneamiento.jpg",
+            image: "assets/images/servicio-06.jpg",
             description: "Mantenimiento y limpieza general de plantas industriales y domésticas."
         },
         {
@@ -74,7 +74,7 @@ const cleanWaterData = {
             number: "07",
             icon: "fa-solid fa-flask",
             color: "blue",
-            image: "assets/images/tratamiento-agua.jpg",
+            image: "assets/images/servicio-07.jpg",
             description: "Suministro de insumos químicos para sistemas de tratamiento de aguas."
         },
         {
@@ -82,7 +82,7 @@ const cleanWaterData = {
             number: "08",
             icon: "fa-solid fa-clipboard-list",
             color: "green",
-            image: "assets/images/gestion-ambiental.jpg",
+            image: "assets/images/servicio-08.jpg",
             description: "Gestión eficaz y asesoramiento para los procesos de trámite ante la autoridad ambiental corporaciones autónomas regionales a nivel nacional."
         },
         {
@@ -90,7 +90,7 @@ const cleanWaterData = {
             number: "09",
             icon: "fa-solid fa-truck-droplet",
             color: "blue",
-            image: "assets/images/saneamiento.jpg",
+            image: "assets/images/servicio-09.jpg",
             description: "Servicio de transporte de lodos y sustancias peligrosas con vactor."
         },
         {
@@ -98,7 +98,7 @@ const cleanWaterData = {
             number: "10",
             icon: "fa-solid fa-helmet-safety",
             color: "green",
-            image: "assets/images/obras-civiles.jpg",
+            image: "assets/images/servicio-10.jpg",
             description: "Construcción de obras civiles en general."
         }
     ],
