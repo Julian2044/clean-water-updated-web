@@ -1,8 +1,15 @@
 document.addEventListener("DOMContentLoaded", () => {
+    // Cargar íconos estáticos del HTML desde js/icons.js
+    if (typeof mountStaticIcons === "function") {
+        mountStaticIcons();
+    }
+
     const views = document.querySelectorAll(".view");
     const navMenu = document.getElementById("navMenu");
     const menuToggle = document.getElementById("menuToggle");
     const backToTop = document.getElementById("backToTop");
+    const serviceField = document.getElementById("service");
+    const messageField = document.getElementById("message");
 
     const validViews = [
         "inicio",
@@ -22,7 +29,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const initialView = getInitialView();
     showView(initialView, false);
 
-    // Navegación por vistas
+    // Navegación general por vistas
     document.addEventListener("click", (event) => {
         const link = event.target.closest("[data-view-link]");
 
@@ -32,8 +39,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (!viewName || !validViews.includes(viewName)) return;
 
-        event.preventDefault();
+        const selectedService = link.getAttribute("data-service-name");
 
+        if (selectedService && serviceField) {
+            serviceField.value = selectedService;
+
+            if (messageField) {
+                messageField.value = `Hola, quiero recibir información sobre el servicio: ${selectedService}.`;
+            }
+        }
+
+        event.preventDefault();
         showView(viewName);
 
         if (navMenu && navMenu.classList.contains("active")) {
@@ -45,20 +61,16 @@ document.addEventListener("DOMContentLoaded", () => {
     if (menuToggle && navMenu) {
         menuToggle.addEventListener("click", () => {
             navMenu.classList.toggle("active");
-
-            const icon = menuToggle.querySelector("i");
-
-            if (!icon) return;
-
-            if (navMenu.classList.contains("active")) {
-                icon.classList.remove("fa-bars");
-                icon.classList.add("fa-xmark");
-            } else {
-                icon.classList.remove("fa-xmark");
-                icon.classList.add("fa-bars");
-            }
+            updateMenuIcon();
         });
     }
+
+    // Cerrar menú móvil con tecla Escape
+    document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape" && navMenu && navMenu.classList.contains("active")) {
+            closeMobileMenu();
+        }
+    });
 
     // Botón volver al inicio
     if (backToTop) {
@@ -73,6 +85,12 @@ document.addEventListener("DOMContentLoaded", () => {
     if (contactForm) {
         contactForm.addEventListener("submit", handleContactForm);
     }
+
+    // Si el usuario cambia manualmente el hash de la URL
+    window.addEventListener("hashchange", () => {
+        const hashView = getInitialView();
+        showView(hashView, false);
+    });
 
     function showView(viewName, updateUrl = true) {
         views.forEach((view) => {
@@ -121,16 +139,24 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     function closeMobileMenu() {
-        if (!navMenu || !menuToggle) return;
+        if (!navMenu) return;
 
         navMenu.classList.remove("active");
+        updateMenuIcon();
+    }
 
-        const icon = menuToggle.querySelector("i");
+    function updateMenuIcon() {
+        if (!menuToggle || !navMenu) return;
+
+        const icon = menuToggle.querySelector(".menu-icon");
 
         if (!icon) return;
 
-        icon.classList.remove("fa-xmark");
-        icon.classList.add("fa-bars");
+        if (navMenu.classList.contains("active")) {
+            icon.textContent = "×";
+        } else {
+            icon.textContent = "☰";
+        }
     }
 
     function getInitialView() {
@@ -153,16 +179,16 @@ document.addEventListener("DOMContentLoaded", () => {
                 return `
                     <article class="service-card">
                         <div class="service-image">
-                            <img
-                                src="${service.image}"
-                                alt="${service.title}"
+                            <img 
+                                src="${service.image}" 
+                                alt="${service.title}" 
                                 loading="lazy"
                             >
                         </div>
 
                         <div class="service-content">
                             <div class="service-icon ${service.color}">
-                                <i class="${service.icon}"></i>
+                                ${getIcon(service.icon)}
                             </div>
 
                             <span class="service-number">${service.number}</span>
@@ -171,9 +197,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
                             <p>${service.description}</p>
 
-                            <button type="button" class="card-action" data-view-link="contacto">
+                            <button
+                                type="button"
+                                class="card-action"
+                                data-view-link="contacto"
+                                data-service-name="${service.title}"
+                            >
                                 Solicitar información
-                                <i class="fa-solid fa-arrow-right"></i>
+                                ${getIcon("arrow")}
                             </button>
                         </div>
                     </article>
@@ -188,10 +219,13 @@ document.addEventListener("DOMContentLoaded", () => {
         if (!environmentList || typeof cleanWaterData === "undefined") return;
 
         environmentList.innerHTML = cleanWaterData.environmentalProcesses
-            .map((item) => {
+            .map((item, index) => {
                 return `
                     <div class="environment-item">
-                        <i class="fa-solid fa-check"></i>
+                        <span class="environment-svg">
+                            ${getIcon(getEnvironmentalIcon(index))}
+                        </span>
+
                         <span>${item}</span>
                     </div>
                 `;
@@ -218,9 +252,7 @@ document.addEventListener("DOMContentLoaded", () => {
                                 onerror="this.style.display='none'; this.nextElementSibling.style.display='grid';"
                             >
 
-                            <span class="client-fallback">
-                                ${initials}
-                            </span>
+                            <span class="client-fallback">${initials}</span>
                         </div>
 
                         <h3>${client.name}</h3>
@@ -240,9 +272,9 @@ document.addEventListener("DOMContentLoaded", () => {
             .map((item) => {
                 return `
                     <article class="gallery-card">
-                        <img
-                            src="${item.image}"
-                            alt="${item.title}"
+                        <img 
+                            src="${item.image}" 
+                            alt="${item.title}" 
                             loading="lazy"
                         >
 
@@ -270,7 +302,7 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
 
-        const whatsappNumber = "573219619924";
+        const whatsappNumber = "573219648702";
 
         const whatsappMessage = `
 Hola, quiero solicitar una cotización con Clean Water Updated S.A.S.
@@ -297,7 +329,7 @@ Mensaje: ${message || "No especificado"}
             .replace("Centro Empresarial", "")
             .replace("S.A.", "")
             .replace("S.A.S.", "")
-            .replace(".", "")
+            .replace(/\./g, "")
             .trim();
 
         const words = cleanName
@@ -313,5 +345,26 @@ Mensaje: ${message || "No especificado"}
             .map((word) => word[0])
             .join("")
             .toUpperCase();
+    }
+
+    function getEnvironmentalIcon(index) {
+        const icons = [
+            "water",
+            "leaf",
+            "leaf",
+            "briefcase",
+            "recycle",
+            "shield"
+        ];
+
+        return icons[index] || "check";
+    }
+
+    function getIcon(iconName) {
+        if (typeof cwIcon === "function") {
+            return cwIcon(iconName);
+        }
+
+        return "";
     }
 });

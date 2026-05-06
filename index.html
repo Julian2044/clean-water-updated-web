@@ -21,11 +21,6 @@
             href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap"
             rel="stylesheet"
     />
-
-    <script
-            src="https://kit.fontawesome.com/8d6f76c1c8.js"
-            crossorigin="anonymous"
-    ></script>
 </head>
 
 <body>
@@ -34,22 +29,22 @@
 <header class="top-bar">
     <div class="container top-bar-content">
         <div class="top-left">
-            <span>
-                <i class="fa-solid fa-envelope"></i>
+            <a href="mailto:cwaterup@gmail.com">
+                <span class="svg-icon" data-icon="mail"></span>
                 cwaterup@gmail.com
-            </span>
+            </a>
 
-            <span>
-                <i class="fa-solid fa-phone"></i>
-                321 961 9924
-            </span>
+            <a href="tel:+573219648702">
+                <span class="svg-icon" data-icon="phone"></span>
+                321 964 87 02
+            </a>
         </div>
 
         <div class="top-right">
             <span>Soluciones integrales para el agua, el ambiente y la infraestructura técnica.</span>
 
-            <a href="https://wa.me/573219619924" target="_blank" aria-label="WhatsApp">
-                <i class="fa-brands fa-whatsapp"></i>
+            <a href="https://wa.me/573219648702" target="_blank" aria-label="WhatsApp">
+                <span class="svg-icon" data-icon="whatsapp"></span>
                 WhatsApp
             </a>
         </div>
@@ -64,7 +59,7 @@
         </a>
 
         <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú">
-            <i class="fa-solid fa-bars"></i>
+            <span class="menu-icon">☰</span>
         </button>
 
         <ul class="nav-menu" id="navMenu">
@@ -112,7 +107,7 @@
 
             <li>
                 <a href="#" class="btn-nav" data-view-link="contacto">
-                    <i class="fa-solid fa-file-lines"></i>
+                    <span class="svg-icon" data-icon="briefcase"></span>
                     Solicitar Cotización
                 </a>
             </li>
@@ -146,12 +141,12 @@
 
                     <div class="hero-actions">
                         <a href="#" class="btn btn-blue" data-view-link="servicios">
-                            <i class="fa-solid fa-briefcase"></i>
+                            <span class="svg-icon" data-icon="briefcase"></span>
                             Nuestros Servicios
                         </a>
 
-                        <a href="https://wa.me/573219619924" target="_blank" class="btn btn-outline">
-                            <i class="fa-brands fa-whatsapp"></i>
+                        <a href="https://wa.me/573219648702" target="_blank" class="btn btn-outline">
+                            <span class="svg-icon" data-icon="whatsapp"></span>
                             Escríbenos por WhatsApp
                         </a>
                     </div>
@@ -160,7 +155,7 @@
                 <div class="hero-highlights">
                     <article class="highlight-card">
                         <div class="highlight-icon blue">
-                            <i class="fa-solid fa-building"></i>
+                            <span class="svg-icon" data-icon="briefcase"></span>
                         </div>
 
                         <div>
@@ -171,7 +166,7 @@
 
                     <article class="highlight-card">
                         <div class="highlight-icon green">
-                            <i class="fa-solid fa-leaf"></i>
+                            <span class="svg-icon" data-icon="leaf"></span>
                         </div>
 
                         <div>
@@ -182,7 +177,7 @@
 
                     <article class="highlight-card">
                         <div class="highlight-icon blue">
-                            <i class="fa-solid fa-shield-halved"></i>
+                            <span class="svg-icon" data-icon="shield"></span>
                         </div>
 
                         <div>
@@ -199,7 +194,7 @@
 
     <!-- VIEW: NOSOTROS -->
     <section class="view" id="view-nosotros" data-view="nosotros">
-        <div class="container screen-content">
+        <div class="container screen-content about-screen">
             <div class="screen-header">
                 <span class="eyebrow">Acerca de nosotros</span>
 
@@ -207,52 +202,144 @@
 
                 <p>
                     Somos una empresa compuesta por profesionales experimentados,
-                    dedicada a proporcionar soluciones integrales para el sector público
-                    y privado.
+                    dedicada a proporcionar soluciones integrales para el sector público y privado.
                 </p>
             </div>
 
-            <div class="about-grid">
+            <div class="about-grid premium-about-grid">
                 <article class="about-card main-about-card">
+                    <span class="about-badge">01 · Empresa</span>
+
                     <div class="about-icon">
-                        <i class="fa-solid fa-users-gear"></i>
+                        <span class="svg-icon" data-icon="users"></span>
                     </div>
 
                     <h3>¿Quiénes somos?</h3>
 
                     <p>
-                        Nos especializamos en mantenimiento de aires acondicionados,
-                        sistemas eléctricos, operación y mantenimiento de plantas de
-                        tratamiento de agua, suministro de repuestos y saneamiento básico.
+                        Somos una empresa compuesta por profesionales altamente experimentados
+                        en diversas áreas del conocimiento, dedicados a proporcionar soluciones
+                        integrales a las necesidades del sector público y privado.
                     </p>
+
+                    <div class="about-tags">
+                        <span>
+                            <span class="svg-icon" data-icon="check"></span>
+                            Sector público y privado
+                        </span>
+
+                        <span>
+                            <span class="svg-icon" data-icon="check"></span>
+                            Soluciones integrales
+                        </span>
+
+                        <span>
+                            <span class="svg-icon" data-icon="check"></span>
+                            Equipo especializado
+                        </span>
+                    </div>
                 </article>
 
                 <article class="about-card">
+                    <span class="about-badge soft-green">02 · Propósito</span>
+
                     <div class="about-icon green">
-                        <i class="fa-solid fa-bullseye"></i>
+                        <span class="svg-icon" data-icon="target"></span>
                     </div>
 
                     <h3>Misión</h3>
 
                     <p>
-                        Proporcionar soluciones integrales y de alta calidad,
-                        satisfaciendo las necesidades de nuestros clientes y contribuyendo
-                        al bienestar de las comunidades.
+                        Proporcionar soluciones integrales y de alta calidad en mantenimiento
+                        de aires acondicionados, sistemas eléctricos, operación y mantenimiento
+                        de plantas de tratamiento de agua, suministro de repuestos y servicios
+                        de saneamiento básico.
                     </p>
+
+                    <div class="about-mini-list">
+                        <span>
+                            <span class="svg-icon" data-icon="check"></span>
+                            Calidad en el servicio
+                        </span>
+
+                        <span>
+                            <span class="svg-icon" data-icon="check"></span>
+                            Desarrollo sostenible
+                        </span>
+
+                        <span>
+                            <span class="svg-icon" data-icon="check"></span>
+                            Bienestar de comunidades
+                        </span>
+                    </div>
                 </article>
 
                 <article class="about-card">
+                    <span class="about-badge soft-blue">03 · Futuro</span>
+
                     <div class="about-icon blue">
-                        <i class="fa-solid fa-chart-line"></i>
+                        <span class="svg-icon" data-icon="chart"></span>
                     </div>
 
                     <h3>Visión 2030</h3>
 
                     <p>
-                        Ser una organización consolidada administrativa, técnica y
-                        financieramente, referente de servicio confiable en el sector
+                        Ser una organización en crecimiento y consolidada administrativa,
+                        técnica y financieramente, referente de servicio confiable en el sector
                         público y privado.
                     </p>
+
+                    <div class="about-mini-list">
+                        <span>
+                            <span class="svg-icon" data-icon="check"></span>
+                            Crecimiento empresarial
+                        </span>
+
+                        <span>
+                            <span class="svg-icon" data-icon="check"></span>
+                            Solidez técnica
+                        </span>
+
+                        <span>
+                            <span class="svg-icon" data-icon="check"></span>
+                            Servicio confiable
+                        </span>
+                    </div>
+                </article>
+            </div>
+
+            <div class="about-metrics">
+                <article class="metric-card">
+                    <div class="metric-icon">
+                        <span class="svg-icon" data-icon="users"></span>
+                    </div>
+
+                    <div>
+                        <strong>Sector público y privado</strong>
+                        <p>Atención a empresas, instituciones y proyectos técnicos.</p>
+                    </div>
+                </article>
+
+                <article class="metric-card">
+                    <div class="metric-icon green">
+                        <span class="svg-icon" data-icon="water"></span>
+                    </div>
+
+                    <div>
+                        <strong>Soluciones integrales</strong>
+                        <p>Agua, climatización, electricidad, saneamiento y obras civiles.</p>
+                    </div>
+                </article>
+
+                <article class="metric-card">
+                    <div class="metric-icon">
+                        <span class="svg-icon" data-icon="leaf"></span>
+                    </div>
+
+                    <div>
+                        <strong>Desarrollo sostenible</strong>
+                        <p>Compromiso con el bienestar social y ambiental.</p>
+                    </div>
                 </article>
             </div>
         </div>
@@ -267,13 +354,13 @@
                 <h2>Nuestras Soluciones</h2>
 
                 <p>
-                    Ofrecemos soluciones técnicas y ambientales adaptadas a las
-                    necesidades de empresas, conjuntos, centros empresariales e instituciones.
+                    Ofrecemos soluciones técnicas y ambientales adaptadas a las necesidades
+                    de empresas, conjuntos, centros empresariales e instituciones.
                 </p>
             </div>
 
             <div class="services-grid" id="servicesGrid">
-                <!-- Se llena desde js/data.js -->
+                <!-- Se llena desde js/data.js y js/app.js -->
             </div>
         </div>
     </section>
@@ -288,13 +375,30 @@
                     <h2>Trámites y acompañamiento ambiental</h2>
 
                     <p>
-                        Brindamos asesoría y gestión eficaz para procesos ante autoridades
-                        ambientales, corporaciones autónomas regionales y entidades
-                        nacionales.
+                        Brindamos gestión eficaz y asesoramiento para los procesos de
+                        trámite ante la autoridad ambiental y corporaciones autónomas
+                        regionales a nivel nacional.
                     </p>
 
-                    <a href="https://wa.me/573219619924" target="_blank" class="btn btn-blue">
-                        <i class="fa-brands fa-whatsapp"></i>
+                    <div class="environment-highlights">
+                        <span>
+                            <span class="svg-icon" data-icon="briefcase"></span>
+                            Permisos
+                        </span>
+
+                        <span>
+                            <span class="svg-icon" data-icon="leaf"></span>
+                            Manejo ambiental
+                        </span>
+
+                        <span>
+                            <span class="svg-icon" data-icon="shield"></span>
+                            Acompañamiento
+                        </span>
+                    </div>
+
+                    <a href="https://wa.me/573219648702" target="_blank" class="btn btn-blue">
+                        <span class="svg-icon" data-icon="whatsapp"></span>
                         Solicitar asesoría
                     </a>
                 </div>
@@ -303,7 +407,7 @@
                     <h3>Procesos que acompañamos</h3>
 
                     <div class="environment-list" id="environmentList">
-                        <!-- Se llena desde js/data.js -->
+                        <!-- Se llena desde js/data.js y js/app.js -->
                     </div>
                 </div>
             </div>
@@ -325,7 +429,7 @@
             </div>
 
             <div class="clients-grid" id="clientsGrid">
-                <!-- Se llena desde js/data.js -->
+                <!-- Se llena desde js/data.js y js/app.js -->
             </div>
         </div>
     </section>
@@ -345,7 +449,7 @@
             </div>
 
             <div class="gallery-grid" id="galleryGrid">
-                <!-- Se llena desde js/data.js -->
+                <!-- Se llena desde js/data.js y js/app.js -->
             </div>
         </div>
     </section>
@@ -366,29 +470,59 @@
 
                     <div class="contact-items">
                         <div class="contact-item">
-                            <i class="fa-solid fa-envelope"></i>
-                            <span>cwaterup@gmail.com</span>
+                            <span class="svg-icon" data-icon="mail"></span>
+                            <a href="mailto:cwaterup@gmail.com">cwaterup@gmail.com</a>
                         </div>
 
                         <div class="contact-item">
-                            <i class="fa-solid fa-phone"></i>
-                            <span>321 961 9924</span>
+                            <span class="svg-icon" data-icon="phone"></span>
+                            <a href="tel:+573219648702">321 964 87 02</a>
                         </div>
 
                         <div class="contact-item">
-                            <i class="fa-solid fa-location-dot"></i>
+                            <span class="svg-icon" data-icon="location"></span>
                             <span>Bogotá D.C., Colombia</span>
                         </div>
                     </div>
 
+                    <div class="contact-socials">
+                        <h3>Síguenos en redes</h3>
+
+                        <div class="social-links">
+                            <a href="#" class="social-link linkedin" target="_blank" aria-label="LinkedIn">
+                                <span class="svg-icon" data-icon="linkedin"></span>
+                            </a>
+
+                            <a href="#" class="social-link facebook" target="_blank" aria-label="Facebook">
+                                <span class="svg-icon" data-icon="facebook"></span>
+                            </a>
+
+                            <a href="#" class="social-link instagram" target="_blank" aria-label="Instagram">
+                                <span class="svg-icon" data-icon="instagram"></span>
+                            </a>
+
+                            <a href="#" class="social-link youtube" target="_blank" aria-label="YouTube">
+                                <span class="svg-icon" data-icon="youtube"></span>
+                            </a>
+
+                            <a href="https://wa.me/573219648702" class="social-link whatsapp" target="_blank" aria-label="WhatsApp">
+                                <span class="svg-icon" data-icon="whatsapp"></span>
+                            </a>
+                        </div>
+
+                        <p class="social-note">
+                            Reemplaza los enlaces de redes sociales cuando tengas las URL oficiales.
+                        </p>
+                    </div>
+
                     <div class="contact-actions">
-                        <a href="https://wa.me/573219619924" target="_blank" class="btn btn-blue">
-                            <i class="fa-brands fa-whatsapp"></i>
+                        <a href="https://wa.me/573219648702" target="_blank" class="btn btn-blue">
+                            <span class="svg-icon" data-icon="whatsapp"></span>
                             Solicitar cotización
                         </a>
 
                         <a href="mailto:cwaterup@gmail.com" class="btn btn-outline">
-                            <i class="fa-solid fa-envelope"></i>
+                            <span class="svg-icon" data-icon="mail"></span>
                             Enviar correo
                         </a>
                     </div>
@@ -404,18 +538,22 @@
 
                     <select id="service" required>
                         <option value="">Servicio de interés</option>
-                        <option value="Climatización">Climatización</option>
-                        <option value="Tratamiento de Agua">Tratamiento de Agua</option>
-                        <option value="Sistemas Eléctricos">Sistemas Eléctricos</option>
-                        <option value="Saneamiento Básico">Saneamiento Básico</option>
-                        <option value="Gestión Ambiental">Gestión Ambiental</option>
-                        <option value="Obras Civiles">Obras Civiles</option>
+                        <option value="Mantenimiento preventivo y correctivo">Mantenimiento preventivo y correctivo</option>
+                        <option value="Puesta en marcha">Puesta en marcha</option>
+                        <option value="Instalación de aires acondicionados">Instalación de aires acondicionados</option>
+                        <option value="Diseño y montaje de plantas">Diseño y montaje de plantas</option>
+                        <option value="Operación de plantas de tratamiento">Operación de plantas de tratamiento</option>
+                        <option value="Mantenimiento y limpieza de plantas">Mantenimiento y limpieza de plantas</option>
+                        <option value="Suministro de insumos químicos">Suministro de insumos químicos</option>
+                        <option value="Gestión ambiental">Gestión ambiental</option>
+                        <option value="Transporte de lodos y sustancias peligrosas">Transporte de lodos y sustancias peligrosas</option>
+                        <option value="Obras civiles">Obras civiles</option>
                     </select>
 
                     <textarea id="message" rows="5" placeholder="Cuéntanos tu necesidad"></textarea>
 
                     <button type="submit">
-                        <i class="fa-solid fa-paper-plane"></i>
+                        <span class="svg-icon" data-icon="arrow"></span>
                         Enviar por WhatsApp
                     </button>
                 </form>
@@ -425,47 +563,75 @@
 
 </main>
 
-<!-- FIXED FOOTER -->
+<!-- FOOTER -->
 <footer class="site-footer">
     <div class="container footer-content">
         <div class="footer-brand">
             <img src="assets/logo/logo.png" alt="Clean Water Updated S.A.S." />
 
-            <p>
-                Soluciones integrales para el agua, el ambiente y la infraestructura técnica.
-            </p>
+            <div class="footer-brand-text">
+                <h3>Clean Water Updated S.A.S.</h3>
+                <p>
+                    Soluciones integrales para el agua, el ambiente y la infraestructura técnica.
+                </p>
+            </div>
         </div>
 
-        <div class="footer-links">
-            <a href="#" data-view-link="nosotros">Nosotros</a>
-            <a href="#" data-view-link="servicios">Servicios</a>
-            <a href="#" data-view-link="clientes">Clientes</a>
-            <a href="#" data-view-link="contacto">Contacto</a>
-        </div>
+        <div class="footer-right">
+            <div class="footer-contact">
+                <p>
+                    <a href="mailto:cwaterup@gmail.com">cwaterup@gmail.com</a>
+                </p>
 
-        <div class="footer-contact">
-            <p>cwaterup@gmail.com</p>
-            <p>321 961 9924</p>
-            <p>© 2026 Clean Water Updated S.A.S.</p>
+                <p>
+                    <a href="tel:+573219648702">321 964 87 02</a>
+                </p>
+
+                <p>© 2026 Clean Water Updated S.A.S.</p>
+            </div>
+
+            <div class="footer-socials">
+                <a href="#" target="_blank" aria-label="LinkedIn">
+                    <span class="svg-icon" data-icon="linkedin"></span>
+                </a>
+
+                <a href="#" target="_blank" aria-label="Facebook">
+                    <span class="svg-icon" data-icon="facebook"></span>
+                </a>
+
+                <a href="#" target="_blank" aria-label="Instagram">
+                    <span class="svg-icon" data-icon="instagram"></span>
+                </a>
+
+                <a href="#" target="_blank" aria-label="YouTube">
+                    <span class="svg-icon" data-icon="youtube"></span>
+                </a>
+
+                <a href="https://wa.me/573219648702" target="_blank" aria-label="WhatsApp">
+                    <span class="svg-icon" data-icon="whatsapp"></span>
+                </a>
+            </div>
         </div>
     </div>
 </footer>
 
 <!-- WHATSAPP FLOAT -->
 <a
-        href="https://wa.me/573219619924"
+        href="https://wa.me/573219648702"
         target="_blank"
         class="whatsapp-float"
         aria-label="WhatsApp Clean Water"
 >
-    <i class="fa-brands fa-whatsapp"></i>
+    <span class="svg-icon" data-icon="whatsapp"></span>
+    <span>WhatsApp</span>
 </a>
 
-<!-- BACK TO TOP / INICIO -->
+<!-- BACK TO TOP -->
 <button class="back-to-top" id="backToTop" aria-label="Volver al inicio">
-    <i class="fa-solid fa-chevron-up"></i>
+    ↑
 </button>
 
+<script src="js/icons.js"></script>
 <script src="js/data.js"></script>
 <script src="js/app.js"></script>
 </body>

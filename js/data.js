@@ -2,7 +2,7 @@ const cleanWaterData = {
     company: {
         name: "CLEAN WATER UPDATED S.A.S",
         email: "cwaterup@gmail.com",
-        phone: "3219619924",
+        phone: "3219648702",
 
         about: {
             title: "¿QUIÉNES SOMOS?",
@@ -22,80 +22,80 @@ const cleanWaterData = {
 
     services: [
         {
-            title: "Mantenimiento preventivo y correctivo",
             number: "01",
+            title: "Mantenimiento preventivo y correctivo",
             icon: "fa-solid fa-fan",
             color: "blue",
             image: "assets/images/servicio-01.jpg",
             description: "Mantenimiento, preventivo y correctivo de equipos de aire acondicionado y ventilación mecánica."
         },
         {
-            title: "Puesta en marcha",
             number: "02",
+            title: "Puesta en marcha",
             icon: "fa-solid fa-screwdriver-wrench",
             color: "green",
             image: "assets/images/servicio-02.jpg",
             description: "Instrucciones de aire acondicionado y puesta en marcha."
         },
         {
-            title: "Instalación de aires acondicionados",
             number: "03",
+            title: "Instalación de aires acondicionados",
             icon: "fa-solid fa-wind",
             color: "blue",
             image: "assets/images/servicio-03.jpg",
             description: "Instalación de aires acondicionados y ventilación mecánica."
         },
         {
-            title: "Diseño y montaje de plantas",
             number: "04",
+            title: "Diseño y montaje de plantas",
             icon: "fa-solid fa-industry",
             color: "green",
             image: "assets/images/servicio-04.jpg",
             description: "Diseño, construcción y montaje de plantas de tratamiento de aguas residuales y potables."
         },
         {
-            title: "Operación de plantas de tratamiento",
             number: "05",
+            title: "Operación de plantas de tratamiento",
             icon: "fa-solid fa-droplet",
             color: "blue",
             image: "assets/images/servicio-05.jpg",
             description: "Operación de plantas de tratamiento de aguas residuales domésticas e industriales, potabilización y aguas lluvias (PTARD PTARI, PTAP Y PTALL)."
         },
         {
-            title: "Mantenimiento y limpieza de plantas",
             number: "06",
+            title: "Mantenimiento y limpieza de plantas",
             icon: "fa-solid fa-recycle",
             color: "green",
             image: "assets/images/servicio-06.jpg",
             description: "Mantenimiento y limpieza general de plantas industriales y domésticas."
         },
         {
-            title: "Suministro de insumos químicos",
             number: "07",
+            title: "Suministro de insumos químicos",
             icon: "fa-solid fa-flask",
             color: "blue",
             image: "assets/images/servicio-07.jpg",
             description: "Suministro de insumos químicos para sistemas de tratamiento de aguas."
         },
         {
-            title: "Gestión ambiental",
             number: "08",
+            title: "Gestión ambiental",
             icon: "fa-solid fa-clipboard-list",
             color: "green",
             image: "assets/images/servicio-08.jpg",
             description: "Gestión eficaz y asesoramiento para los procesos de trámite ante la autoridad ambiental corporaciones autónomas regionales a nivel nacional."
         },
         {
-            title: "Transporte de lodos y sustancias peligrosas",
             number: "09",
+            title: "Transporte de lodos y sustancias peligrosas",
             icon: "fa-solid fa-truck-droplet",
             color: "blue",
             image: "assets/images/servicio-09.jpg",
             description: "Servicio de transporte de lodos y sustancias peligrosas con vactor."
         },
         {
-            title: "Obras civiles",
             number: "10",
+            title: "Obras civiles",
             icon: "fa-solid fa-helmet-safety",
             color: "green",
             image: "assets/images/servicio-10.jpg",
@@ -120,17 +120,17 @@ const cleanWaterData = {
         },
         {
             name: "Calima",
-            description: "Centro empresarial",
+            description: "Cliente corporativo",
             logo: "assets/clients/calima.png"
         },
         {
             name: "Prados del Este",
-            description: "Condominio",
+            description: "Cliente corporativo",
             logo: "assets/clients/prados-del-este.png"
         },
         {
             name: "Centro Empresarial TYFA",
-            description: "Cliente empresarial",
+            description: "Centro empresarial",
             logo: "assets/clients/tyfa.png"
         },
         {
@@ -140,7 +140,7 @@ const cleanWaterData = {
         },
         {
             name: "Centro Empresarial San Isidro",
-            description: "Cliente empresarial",
+            description: "Centro empresarial",
             logo: "assets/clients/san-isidro.png"
         },
         {
