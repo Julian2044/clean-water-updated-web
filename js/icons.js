@@ -41,9 +41,9 @@ const ICONS = {
         </svg>
     `,
 
-    youtube: `
+    x: `
         <svg viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M23.5 6.2s-.2-1.7-1-2.4c-1-.9-2-.9-2.5-1C16.5 2.5 12 2.5 12 2.5s-4.5 0-8 .3c-.5.1-1.6.1-2.5 1-.8.7-1 2.4-1 2.4S0 8.2 0 10.3v1.9c0 2.1.5 4.1.5 4.1s.2 1.7 1 2.4c1 .9 2.3.9 2.9 1C6.5 20 12 20 12 20s4.5 0 8-.3c.5-.1 1.6-.1 2.5-1 .8-.7 1-2.4 1-2.4s.5-2 .5-4.1v-1.9c0-2.1-.5-4.1-.5-4.1ZM9.5 14.8V7.7l6.2 3.6-6.2 3.5Z"/>
+            <path d="M18.9 2h3.2l-7 8 8.2 12h-6.4l-5-7.3L6.2 22H2.9l7.5-8.6L2.5 2h6.6l4.5 6.5L18.9 2Zm-1.1 17.9h1.8L8.1 4H6.2l11.6 15.9Z"/>
         </svg>
     `,
 
@@ -148,11 +148,13 @@ const ICON_ALIASES = {
     "fa-solid fa-envelope": "mail",
     "fa-solid fa-phone": "phone",
     "fa-solid fa-location-dot": "location",
+
     "fa-brands fa-whatsapp": "whatsapp",
     "fa-brands fa-linkedin-in": "linkedin",
     "fa-brands fa-facebook-f": "facebook",
     "fa-brands fa-instagram": "instagram",
-    "fa-brands fa-youtube": "youtube",
+    "fa-brands fa-x-twitter": "x",
+    "fa-brands fa-twitter": "x",
 
     "fa-solid fa-users": "users",
     "fa-solid fa-users-gear": "users",

@@ -11,6 +11,10 @@ document.addEventListener("DOMContentLoaded", () => {
     const serviceField = document.getElementById("service");
     const messageField = document.getElementById("message");
 
+    const homeServicesTrack = document.getElementById("homeServicesTrack");
+    const homeCarouselPrev = document.getElementById("homeCarouselPrev");
+    const homeCarouselNext = document.getElementById("homeCarouselNext");
+
     const validViews = [
         "inicio",
         "nosotros",
@@ -21,6 +25,10 @@ document.addEventListener("DOMContentLoaded", () => {
         "contacto"
     ];
 
+    let homeCarouselIndex = 0;
+    let homeCarouselTimer = null;
+
+    renderHomeServicesCarousel();
     renderServices();
     renderEnvironmentalProcesses();
     renderClients();
@@ -28,6 +36,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const initialView = getInitialView();
     showView(initialView, false);
+
+    initHomeServicesCarousel();
 
     // Navegación general por vistas
     document.addEventListener("click", (event) => {
@@ -90,6 +100,11 @@ document.addEventListener("DOMContentLoaded", () => {
     window.addEventListener("hashchange", () => {
         const hashView = getInitialView();
         showView(hashView, false);
+    });
+
+    // Recalcular carrusel al cambiar tamaño
+    window.addEventListener("resize", () => {
+        updateHomeCarouselPosition();
     });
 
     function showView(viewName, updateUrl = true) {
@@ -167,6 +182,145 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         return "inicio";
+    }
+
+    function renderHomeServicesCarousel() {
+        if (!homeServicesTrack || typeof cleanWaterData === "undefined") return;
+
+        homeServicesTrack.innerHTML = cleanWaterData.services
+            .map((service) => {
+                return `
+                    <article
+                        class="home-service-card"
+                        data-view-link="servicios"
+                        aria-label="Ver servicio ${service.title}"
+                    >
+                        <img
+                            src="${service.image}"
+                            alt="${service.title}"
+                            loading="lazy"
+                        >
+
+                        <div class="home-service-info">
+                            <div class="home-service-top">
+                                <span class="home-service-number">${service.number}</span>
+
+                                <span class="home-service-icon">
+                                    ${getIcon(service.icon)}
+                                </span>
+                            </div>
+
+                            <h3>${service.title}</h3>
+                            <span>Ver servicio</span>
+                        </div>
+                    </article>
+                `;
+            })
+            .join("");
+    }
+
+    function initHomeServicesCarousel() {
+        if (!homeServicesTrack) return;
+
+        if (homeCarouselPrev) {
+            homeCarouselPrev.addEventListener("click", () => {
+                moveHomeCarousel(-1);
+                restartHomeCarouselAutoPlay();
+            });
+        }
+
+        if (homeCarouselNext) {
+            homeCarouselNext.addEventListener("click", () => {
+                moveHomeCarousel(1);
+                restartHomeCarouselAutoPlay();
+            });
+        }
+
+        homeServicesTrack.addEventListener("mouseenter", stopHomeCarouselAutoPlay);
+        homeServicesTrack.addEventListener("mouseleave", startHomeCarouselAutoPlay);
+
+        updateHomeCarouselPosition();
+        startHomeCarouselAutoPlay();
+    }
+
+    function moveHomeCarousel(direction) {
+        const maxIndex = getHomeCarouselMaxIndex();
+
+        homeCarouselIndex += direction;
+
+        if (homeCarouselIndex < 0) {
+            homeCarouselIndex = maxIndex;
+        }
+
+        if (homeCarouselIndex > maxIndex) {
+            homeCarouselIndex = 0;
+        }
+
+        updateHomeCarouselPosition();
+    }
+
+    function updateHomeCarouselPosition() {
+        if (!homeServicesTrack) return;
+
+        const cards = homeServicesTrack.querySelectorAll(".home-service-card");
+
+        if (!cards.length) return;
+
+        const maxIndex = getHomeCarouselMaxIndex();
+
+        if (homeCarouselIndex > maxIndex) {
+            homeCarouselIndex = maxIndex;
+        }
+
+        const firstCard = cards[0];
+        const cardStyles = window.getComputedStyle(firstCard);
+        const trackStyles = window.getComputedStyle(homeServicesTrack);
+
+        const cardWidth = firstCard.getBoundingClientRect().width;
+        const gap = parseFloat(trackStyles.columnGap || trackStyles.gap || 0);
+
+        const moveX = homeCarouselIndex * (cardWidth + gap);
+
+        homeServicesTrack.style.transform = `translateX(-${moveX}px)`;
+    }
+
+    function getHomeCarouselMaxIndex() {
+        if (!homeServicesTrack || typeof cleanWaterData === "undefined") return 0;
+
+        const totalCards = cleanWaterData.services.length;
+        const visibleCards = getHomeCarouselVisibleCards();
+
+        return Math.max(totalCards - visibleCards, 0);
+    }
+
+    function getHomeCarouselVisibleCards() {
+        const width = window.innerWidth;
+
+        if (width <= 720) return 1;
+        if (width <= 960) return 2;
+        if (width <= 1180) return 3;
+
+        return 4;
+    }
+
+    function startHomeCarouselAutoPlay() {
+        stopHomeCarouselAutoPlay();
+
+        homeCarouselTimer = setInterval(() => {
+            moveHomeCarousel(1);
+        }, 4200);
+    }
+
+    function stopHomeCarouselAutoPlay() {
+        if (homeCarouselTimer) {
+            clearInterval(homeCarouselTimer);
+            homeCarouselTimer = null;
+        }
+    }
+
+    function restartHomeCarouselAutoPlay() {
+        stopHomeCarouselAutoPlay();
+        startHomeCarouselAutoPlay();
     }
 
     function renderServices() {
