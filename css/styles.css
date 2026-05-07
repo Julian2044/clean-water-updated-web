@@ -2235,3 +2235,49 @@ textarea {
 .home-service-icon {
     display: none !important;
 }
+
+/* =========================================================
+   QUITAR CUADRO NEGRO DE ENFOQUE EN MENÚ Y BOTONES
+   Reemplaza el foco por una marca visual limpia
+========================================================= */
+
+.nav-menu a:focus,
+.nav-menu a:focus-visible,
+.btn-nav:focus,
+.btn-nav:focus-visible,
+.logo-box:focus,
+.logo-box:focus-visible,
+button:focus,
+button:focus-visible,
+a:focus,
+a:focus-visible {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+/* Foco elegante para navegación */
+.nav-menu a:focus-visible {
+    color: var(--blue-dark);
+}
+
+.nav-menu a:focus-visible::after {
+    width: 100%;
+    background: var(--green-main);
+}
+
+/* Foco elegante para botones */
+.btn-nav:focus-visible,
+.btn:focus-visible,
+.hero-more-btn:focus-visible,
+.carousel-btn:focus-visible,
+.contact-form button:focus-visible {
+    outline: none !important;
+    box-shadow: 0 0 0 4px rgba(77, 162, 65, 0.22), 0 12px 24px rgba(0, 59, 113, 0.16) !important;
+}
+
+/* Foco elegante para campos del formulario */
+input:focus,
+select:focus,
+textarea:focus {
+    outline: none !important;
+}
