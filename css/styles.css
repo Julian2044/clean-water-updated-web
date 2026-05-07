@@ -603,23 +603,16 @@ textarea {
     left: 0;
     bottom: -1px;
     width: 100%;
-    height: 76px;
+    height: 56px;
     z-index: 6;
     background: #ffffff;
     clip-path: ellipse(72% 54% at 50% 100%);
 }
 
+/* QUITA LA RAYA VERDE DEL HERO */
 .hero-view::after {
-    content: "";
-    position: absolute;
-    left: -4%;
-    bottom: 42px;
-    width: 108%;
-    height: 30px;
-    background: linear-gradient(90deg, var(--green-main), var(--blue-dark));
-    z-index: 5;
-    transform: skewY(2.2deg);
-    transform-origin: left bottom;
+    content: none !important;
+    display: none !important;
 }
 
 /* HOME SERVICES CAROUSEL */
@@ -741,7 +734,7 @@ textarea {
 .home-service-top {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: flex-start;
     margin-bottom: 10px;
 }
 
@@ -749,29 +742,19 @@ textarea {
     min-width: 38px;
     height: 26px;
     border-radius: 999px;
-    background: rgba(255, 255, 255, 0.18);
+    background: rgba(77, 162, 65, 0.95);
+    color: #ffffff;
     display: inline-flex;
     align-items: center;
     justify-content: center;
     font-size: 12px;
     font-weight: 900;
     backdrop-filter: blur(8px);
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.18);
 }
 
 .home-service-icon {
-    width: 42px;
-    height: 42px;
-    border-radius: 50%;
-    display: grid;
-    place-items: center;
-    background: var(--green-main);
-    color: #ffffff;
-    font-size: 19px;
-    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.20);
-}
-
-.home-service-card:nth-child(odd) .home-service-icon {
-    background: var(--blue-dark);
+    display: none !important;
 }
 
 .home-service-info h3 {
@@ -1651,7 +1634,7 @@ textarea {
     background: #0b0d10;
     color: rgba(255, 255, 255, 0.85);
     padding: 32px 0;
-    border-top: 4px solid var(--green-main);
+    border-top: none !important;
 }
 
 .footer-content {
@@ -2120,15 +2103,25 @@ textarea {
     }
 
     .hero-view::after {
-        height: 22px;
-        bottom: 30px;
+        content: none !important;
+        display: none !important;
     }
 
     .footer-brand img {
         width: 132px;
     }
 }
-/* QUITAR CÍRCULOS DE ÍCONOS EN CARRUSEL DE INICIO */
+
+/* LIMPIEZA FINAL */
+.hero-view::after {
+    content: none !important;
+    display: none !important;
+}
+
+.site-footer {
+    border-top: none !important;
+}
+
 .home-service-icon {
     display: none !important;
 }
