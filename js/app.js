@@ -1,524 +1,503 @@
 document.addEventListener("DOMContentLoaded", () => {
-    // Cargar íconos estáticos del HTML desde js/icons.js
-    if (typeof mountStaticIcons === "function") {
-        mountStaticIcons();
-    }
+    const data = window.cleanWaterData || window.siteData || {};
 
-    const views = document.querySelectorAll(".view");
+    const WHATSAPP_NUMBER = data.company?.phoneHref || "+573219648702";
+    const WHATSAPP_TEXT =
+        data.company?.whatsappText ||
+        "Hola, quiero solicitar información sobre los servicios de Clean Water Updated S.A.S.";
+
+    const getWhatsAppUrl = (message = WHATSAPP_TEXT) => {
+        const cleanNumber = WHATSAPP_NUMBER.replace(/\D/g, "");
+        return `https://wa.me/${cleanNumber}?text=${encodeURIComponent(message)}`;
+    };
+
+    const safeText = (value) => value || "";
+
+    const renderAllIcons = (scope = document) => {
+        if (typeof window.renderIcons === "function") {
+            window.renderIcons(scope);
+        }
+    };
+
+    /* =========================
+       HERO
+    ========================= */
+
+    const renderHero = () => {
+        if (!data.hero) return;
+
+        const heroImage = document.querySelector(".hero-background img");
+        const heroKicker = document.querySelector(".hero-kicker");
+        const heroTitle = document.querySelector(".hero-banner-text h1");
+
+        if (heroImage && data.hero.image) {
+            heroImage.src = data.hero.image;
+            heroImage.alt = "Sistemas de tratamiento de aguas Clean Water Updated S.A.S.";
+        }
+
+        if (heroKicker && data.hero.kicker) {
+            heroKicker.textContent = data.hero.kicker;
+        }
+
+        if (heroTitle) {
+            heroTitle.innerHTML = `
+        <span>Sistemas de tratamiento de</span>
+        <span class="hero-blue-word">aguas</span>
+        <strong>con calidad certificada</strong>
+    `;
+        }
+    };
+
+    /* =========================
+       NAVEGACIÓN POR SECCIONES
+    ========================= */
+
     const navMenu = document.getElementById("navMenu");
     const menuToggle = document.getElementById("menuToggle");
-    const backToTop = document.getElementById("backToTop");
-    const serviceField = document.getElementById("service");
-    const messageField = document.getElementById("message");
+    const viewLinks = document.querySelectorAll("[data-view-link]");
+    const views = document.querySelectorAll(".view");
 
-    const homeServicesTrack = document.getElementById("homeServicesTrack");
-    const homeCarouselPrev = document.getElementById("homeCarouselPrev");
-    const homeCarouselNext = document.getElementById("homeCarouselNext");
+    const setActiveView = (viewName) => {
+        const targetViewName = viewName || "inicio";
 
-    const validViews = [
-        "inicio",
-        "nosotros",
-        "servicios",
-        "tramites",
-        "clientes",
-        "galeria",
-        "contacto"
-    ];
-
-    let homeCarouselIndex = 0;
-    let homeCarouselTimer = null;
-
-    renderHomeServicesCarousel();
-    renderServices();
-    renderEnvironmentalProcesses();
-    renderClients();
-    renderGallery();
-
-    const initialView = getInitialView();
-    showView(initialView, false);
-
-    initHomeServicesCarousel();
-
-    // Navegación general por vistas
-    document.addEventListener("click", (event) => {
-        const link = event.target.closest("[data-view-link]");
-
-        if (!link) return;
-
-        const viewName = link.getAttribute("data-view-link");
-
-        if (!viewName || !validViews.includes(viewName)) return;
-
-        const selectedService = link.getAttribute("data-service-name");
-
-        if (selectedService && serviceField) {
-            serviceField.value = selectedService;
-
-            if (messageField) {
-                messageField.value = `Hola, quiero recibir información sobre el servicio: ${selectedService}.`;
-            }
-        }
-
-        event.preventDefault();
-        showView(viewName);
-
-        if (navMenu && navMenu.classList.contains("active")) {
-            closeMobileMenu();
-        }
-    });
-
-    // Menú responsive
-    if (menuToggle && navMenu) {
-        menuToggle.addEventListener("click", () => {
-            navMenu.classList.toggle("active");
-            updateMenuIcon();
-        });
-    }
-
-    // Cerrar menú móvil con tecla Escape
-    document.addEventListener("keydown", (event) => {
-        if (event.key === "Escape" && navMenu && navMenu.classList.contains("active")) {
-            closeMobileMenu();
-        }
-    });
-
-    // Botón volver al inicio
-    if (backToTop) {
-        backToTop.addEventListener("click", () => {
-            showView("inicio");
-        });
-    }
-
-    // Formulario de contacto
-    const contactForm = document.getElementById("contactForm");
-
-    if (contactForm) {
-        contactForm.addEventListener("submit", handleContactForm);
-    }
-
-    // Si el usuario cambia manualmente el hash de la URL
-    window.addEventListener("hashchange", () => {
-        const hashView = getInitialView();
-        showView(hashView, false);
-    });
-
-    // Recalcular carrusel al cambiar tamaño
-    window.addEventListener("resize", () => {
-        updateHomeCarouselPosition();
-    });
-
-    function showView(viewName, updateUrl = true) {
         views.forEach((view) => {
-            const currentView = view.getAttribute("data-view");
-
-            if (currentView === viewName) {
-                view.classList.add("active");
-            } else {
-                view.classList.remove("active");
-            }
+            const isActive = view.dataset.view === targetViewName;
+            view.classList.toggle("active", isActive);
         });
 
-        updateActiveMenu(viewName);
-        updateBackToTop(viewName);
+        document.querySelectorAll(".nav-link").forEach((link) => {
+            const isActive = link.dataset.viewLink === targetViewName;
+            link.classList.toggle("active", isActive);
+        });
+
+        if (navMenu) {
+            navMenu.classList.remove("active");
+        }
 
         window.scrollTo({
             top: 0,
             behavior: "smooth"
         });
 
-        if (updateUrl) {
-            history.replaceState(null, "", `#${viewName}`);
+        renderAllIcons();
+
+        const currentHash = `#${targetViewName}`;
+
+        if (window.location.hash !== currentHash) {
+            history.pushState(null, "", currentHash);
         }
-    }
+    };
 
-    function updateActiveMenu(viewName) {
-        const navLinks = document.querySelectorAll(".nav-link");
+    viewLinks.forEach((link) => {
+        link.addEventListener("click", (event) => {
+            event.preventDefault();
 
-        navLinks.forEach((link) => {
-            link.classList.remove("active");
+            const viewName = link.dataset.viewLink;
 
-            if (link.getAttribute("data-view-link") === viewName) {
-                link.classList.add("active");
+            if (viewName) {
+                setActiveView(viewName);
             }
+        });
+    });
+
+    if (menuToggle && navMenu) {
+        menuToggle.addEventListener("click", () => {
+            navMenu.classList.toggle("active");
         });
     }
 
-    function updateBackToTop(viewName) {
-        if (!backToTop) return;
+    window.addEventListener("popstate", () => {
+        const hashView = window.location.hash.replace("#", "") || "inicio";
+        setActiveView(hashView);
+    });
 
-        if (viewName === "inicio") {
-            backToTop.classList.remove("show");
-        } else {
-            backToTop.classList.add("show");
-        }
-    }
+    /* =========================
+       SERVICIOS
+    ========================= */
 
-    function closeMobileMenu() {
-        if (!navMenu) return;
+    const servicesGrid = document.getElementById("servicesGrid");
+    const services = data.services || window.servicesData || window.services || [];
 
-        navMenu.classList.remove("active");
-        updateMenuIcon();
-    }
+    const renderServices = () => {
+        if (!servicesGrid || !services.length) return;
 
-    function updateMenuIcon() {
-        if (!menuToggle || !navMenu) return;
+        servicesGrid.innerHTML = services.map((service, index) => {
+            const iconColor = index % 2 === 0 ? "blue" : "green";
 
-        const icon = menuToggle.querySelector(".menu-icon");
-
-        if (!icon) return;
-
-        if (navMenu.classList.contains("active")) {
-            icon.textContent = "×";
-        } else {
-            icon.textContent = "☰";
-        }
-    }
-
-    function getInitialView() {
-        const hash = window.location.hash.replace("#", "");
-
-        if (validViews.includes(hash)) {
-            return hash;
-        }
-
-        return "inicio";
-    }
-
-    function renderHomeServicesCarousel() {
-        if (!homeServicesTrack || typeof cleanWaterData === "undefined") return;
-
-        homeServicesTrack.innerHTML = cleanWaterData.services
-            .map((service) => {
-                return `
-                    <article
-                        class="home-service-card"
-                        data-view-link="servicios"
-                        aria-label="Ver servicio ${service.title}"
-                    >
+            return `
+                <article class="service-card">
+                    <div class="service-image">
                         <img
-                            src="${service.image}"
-                            alt="${service.title}"
+                            src="${safeText(service.image)}"
+                            alt="${safeText(service.title)}"
                             loading="lazy"
+                        />
+                    </div>
+
+                    <div class="service-content">
+                        <div class="service-icon ${iconColor}">
+                            <span class="svg-icon" data-icon="${safeText(service.icon)}"></span>
+                        </div>
+
+                        <span class="service-number">${safeText(service.number)}</span>
+
+                        <h3>${safeText(service.title)}</h3>
+
+                        <p>${safeText(service.description)}</p>
+
+                        <button
+                            type="button"
+                            class="card-action"
+                            data-service-contact="${safeText(service.title)}"
                         >
+                            ${safeText(service.cta) || "Solicitar información"}
+                            <span class="svg-icon" data-icon="arrow"></span>
+                        </button>
+                    </div>
+                </article>
+            `;
+        }).join("");
 
-                        <div class="home-service-info">
-                            <div class="home-service-top">
-                                <span class="home-service-number">${service.number}</span>
+        renderAllIcons(servicesGrid);
+    };
 
-                                <span class="home-service-icon">
-                                    ${getIcon(service.icon)}
-                                </span>
-                            </div>
+    /* =========================
+       CARRUSEL DE SERVICIOS INICIO
+    ========================= */
 
-                            <h3>${service.title}</h3>
-                            <span>Ver servicio</span>
-                        </div>
-                    </article>
-                `;
-            })
-            .join("");
-    }
+    const homeServicesTrack = document.getElementById("homeServicesTrack");
+    const homeCarouselPrev = document.getElementById("homeCarouselPrev");
+    const homeCarouselNext = document.getElementById("homeCarouselNext");
 
-    function initHomeServicesCarousel() {
-        if (!homeServicesTrack) return;
+    let carouselIndex = 0;
 
-        if (homeCarouselPrev) {
-            homeCarouselPrev.addEventListener("click", () => {
-                moveHomeCarousel(-1);
-                restartHomeCarouselAutoPlay();
-            });
-        }
-
-        if (homeCarouselNext) {
-            homeCarouselNext.addEventListener("click", () => {
-                moveHomeCarousel(1);
-                restartHomeCarouselAutoPlay();
-            });
-        }
-
-        homeServicesTrack.addEventListener("mouseenter", stopHomeCarouselAutoPlay);
-        homeServicesTrack.addEventListener("mouseleave", startHomeCarouselAutoPlay);
-
-        updateHomeCarouselPosition();
-        startHomeCarouselAutoPlay();
-    }
-
-    function moveHomeCarousel(direction) {
-        const maxIndex = getHomeCarouselMaxIndex();
-
-        homeCarouselIndex += direction;
-
-        if (homeCarouselIndex < 0) {
-            homeCarouselIndex = maxIndex;
-        }
-
-        if (homeCarouselIndex > maxIndex) {
-            homeCarouselIndex = 0;
-        }
-
-        updateHomeCarouselPosition();
-    }
-
-    function updateHomeCarouselPosition() {
-        if (!homeServicesTrack) return;
-
-        const cards = homeServicesTrack.querySelectorAll(".home-service-card");
-
-        if (!cards.length) return;
-
-        const maxIndex = getHomeCarouselMaxIndex();
-
-        if (homeCarouselIndex > maxIndex) {
-            homeCarouselIndex = maxIndex;
-        }
-
-        const firstCard = cards[0];
-        const cardStyles = window.getComputedStyle(firstCard);
-        const trackStyles = window.getComputedStyle(homeServicesTrack);
-
-        const cardWidth = firstCard.getBoundingClientRect().width;
-        const gap = parseFloat(trackStyles.columnGap || trackStyles.gap || 0);
-
-        const moveX = homeCarouselIndex * (cardWidth + gap);
-
-        homeServicesTrack.style.transform = `translateX(-${moveX}px)`;
-    }
-
-    function getHomeCarouselMaxIndex() {
-        if (!homeServicesTrack || typeof cleanWaterData === "undefined") return 0;
-
-        const totalCards = cleanWaterData.services.length;
-        const visibleCards = getHomeCarouselVisibleCards();
-
-        return Math.max(totalCards - visibleCards, 0);
-    }
-
-    function getHomeCarouselVisibleCards() {
-        const width = window.innerWidth;
-
-        if (width <= 720) return 1;
-        if (width <= 960) return 2;
-        if (width <= 1180) return 3;
-
+    const getVisibleCards = () => {
+        if (window.innerWidth <= 720) return 1;
+        if (window.innerWidth <= 960) return 2;
+        if (window.innerWidth <= 1180) return 3;
         return 4;
-    }
+    };
 
-    function startHomeCarouselAutoPlay() {
-        stopHomeCarouselAutoPlay();
+    const updateHomeCarousel = () => {
+        if (!homeServicesTrack) return;
 
-        homeCarouselTimer = setInterval(() => {
-            moveHomeCarousel(1);
-        }, 4200);
-    }
+        const firstCard = homeServicesTrack.querySelector(".home-service-card");
+        if (!firstCard) return;
 
-    function stopHomeCarouselAutoPlay() {
-        if (homeCarouselTimer) {
-            clearInterval(homeCarouselTimer);
-            homeCarouselTimer = null;
+        const visibleCards = getVisibleCards();
+        const maxIndex = Math.max(0, services.length - visibleCards);
+
+        if (carouselIndex > maxIndex) {
+            carouselIndex = maxIndex;
         }
-    }
 
-    function restartHomeCarouselAutoPlay() {
-        stopHomeCarouselAutoPlay();
-        startHomeCarouselAutoPlay();
-    }
+        if (carouselIndex < 0) {
+            carouselIndex = 0;
+        }
 
-    function renderServices() {
-        const servicesGrid = document.getElementById("servicesGrid");
+        const cardWidth = firstCard.offsetWidth;
+        const gap = 18;
+        const translateX = carouselIndex * (cardWidth + gap);
 
-        if (!servicesGrid || typeof cleanWaterData === "undefined") return;
+        homeServicesTrack.style.transform = `translateX(-${translateX}px)`;
+    };
 
-        servicesGrid.innerHTML = cleanWaterData.services
-            .map((service) => {
-                return `
-                    <article class="service-card">
-                        <div class="service-image">
-                            <img 
-                                src="${service.image}" 
-                                alt="${service.title}" 
-                                loading="lazy"
-                            >
+    const renderHomeCarousel = () => {
+        if (!homeServicesTrack || !services.length) return;
+
+        homeServicesTrack.innerHTML = services.map((service) => {
+            return `
+                <article class="home-service-card" data-home-service="${safeText(service.title)}">
+                    <img
+                        src="${safeText(service.image)}"
+                        alt="${safeText(service.title)}"
+                        loading="lazy"
+                    />
+
+                    <div class="home-service-info">
+                        <div class="home-service-top">
+                            <span class="home-service-number">${safeText(service.number)}</span>
+                            <span class="home-service-icon">
+                                <span class="svg-icon" data-icon="${safeText(service.icon)}"></span>
+                            </span>
                         </div>
 
-                        <div class="service-content">
-                            <div class="service-icon ${service.color}">
-                                ${getIcon(service.icon)}
-                            </div>
+                        <h3>${safeText(service.title)}</h3>
+                        <span>Ver servicio</span>
+                    </div>
+                </article>
+            `;
+        }).join("");
 
-                            <span class="service-number">${service.number}</span>
+        renderAllIcons(homeServicesTrack);
+        updateHomeCarousel();
+    };
 
-                            <h3>${service.title}</h3>
+    if (homeCarouselNext) {
+        homeCarouselNext.addEventListener("click", () => {
+            const visibleCards = getVisibleCards();
+            const maxIndex = Math.max(0, services.length - visibleCards);
 
-                            <p>${service.description}</p>
+            carouselIndex += 1;
 
-                            <button
-                                type="button"
-                                class="card-action"
-                                data-view-link="contacto"
-                                data-service-name="${service.title}"
-                            >
-                                Solicitar información
-                                ${getIcon("arrow")}
-                            </button>
-                        </div>
-                    </article>
-                `;
-            })
-            .join("");
+            if (carouselIndex > maxIndex) {
+                carouselIndex = 0;
+            }
+
+            updateHomeCarousel();
+        });
     }
 
-    function renderEnvironmentalProcesses() {
-        const environmentList = document.getElementById("environmentList");
+    if (homeCarouselPrev) {
+        homeCarouselPrev.addEventListener("click", () => {
+            const visibleCards = getVisibleCards();
+            const maxIndex = Math.max(0, services.length - visibleCards);
 
-        if (!environmentList || typeof cleanWaterData === "undefined") return;
+            carouselIndex -= 1;
 
-        environmentList.innerHTML = cleanWaterData.environmentalProcesses
-            .map((item, index) => {
-                return `
-                    <div class="environment-item">
-                        <span class="environment-svg">
-                            ${getIcon(getEnvironmentalIcon(index))}
-                        </span>
+            if (carouselIndex < 0) {
+                carouselIndex = maxIndex;
+            }
 
-                        <span>${item}</span>
+            updateHomeCarousel();
+        });
+    }
+
+    window.addEventListener("resize", updateHomeCarousel);
+
+    document.addEventListener("click", (event) => {
+        const homeServiceCard = event.target.closest("[data-home-service]");
+
+        if (homeServiceCard) {
+            setActiveView("servicios");
+        }
+    });
+
+    /* =========================
+       TRÁMITES AMBIENTALES
+    ========================= */
+
+    const environmentList = document.getElementById("environmentList");
+    const environmentItems = data.environmentItems || window.environmentItems || window.environmentData || [];
+
+    const renderEnvironment = () => {
+        if (!environmentList || !environmentItems.length) return;
+
+        environmentList.innerHTML = environmentItems.map((item) => {
+            return `
+                <div class="environment-item">
+                    <span class="environment-svg">
+                        <span class="svg-icon" data-icon="${safeText(item.icon)}"></span>
+                    </span>
+
+                    <span>${safeText(item.title)}</span>
+                </div>
+            `;
+        }).join("");
+
+        renderAllIcons(environmentList);
+    };
+
+    /* =========================
+       CLIENTES
+    ========================= */
+
+    const clientsGrid = document.getElementById("clientsGrid");
+    const clients = data.clients || window.clientsData || window.clients || [];
+
+    const renderClients = () => {
+        if (!clientsGrid || !clients.length) return;
+
+        clientsGrid.innerHTML = clients.map((client) => {
+            return `
+                <article class="client-card">
+                    <div class="client-logo-box">
+                        <img
+                            src="${safeText(client.logo)}"
+                            alt="${safeText(client.name)}"
+                            loading="lazy"
+                            onerror="this.style.display='none'; this.closest('.client-logo-box').querySelector('.client-fallback').style.display='grid';"
+                        />
+
+                        <div class="client-fallback">
+                            ${safeText(client.fallback)}
+                        </div>
+                    </div>
+
+                    <h3>${safeText(client.name)}</h3>
+                    <p>${safeText(client.type)}</p>
+                </article>
+            `;
+        }).join("");
+    };
+
+    /* =========================
+       GALERÍA / PROYECTOS
+       Nueva estructura:
+       media arriba + texto debajo
+    ========================= */
+
+    const galleryGrid = document.getElementById("galleryGrid");
+    const galleryItems = data.gallery || window.galleryData || window.galleryItems || [];
+
+    const renderGallery = () => {
+        if (!galleryGrid || !galleryItems.length) return;
+
+        galleryGrid.innerHTML = galleryItems.map((item) => {
+            const isVideo = item.type === "video" && item.video;
+
+            const mediaContent = isVideo
+                ? `
+                    <video
+                        class="gallery-video"
+                        autoplay
+                        muted
+                        loop
+                        playsinline
+                        preload="metadata"
+                        poster="${safeText(item.image)}"
+                        aria-label="${safeText(item.title)}"
+                    >
+                        <source src="${safeText(item.video)}" type="video/mp4" />
+                    </video>
+                `
+                : `
+                    <div class="gallery-icon-media">
+                        <span class="gallery-icon-bg"></span>
+                        <span class="gallery-main-icon svg-icon" data-icon="${safeText(item.icon)}"></span>
                     </div>
                 `;
-            })
-            .join("");
-    }
 
-    function renderClients() {
-        const clientsGrid = document.getElementById("clientsGrid");
+            return `
+                <article class="gallery-card ${isVideo ? "gallery-card-video" : "gallery-card-icon"}">
+                    <div class="gallery-media-frame">
+                        ${mediaContent}
+                    </div>
 
-        if (!clientsGrid || typeof cleanWaterData === "undefined") return;
+                    <div class="gallery-card-body">
+                        <span class="gallery-category">${safeText(item.category)}</span>
+                        <h3>${safeText(item.title)}</h3>
+                    </div>
+                </article>
+            `;
+        }).join("");
 
-        clientsGrid.innerHTML = cleanWaterData.clients
-            .map((client) => {
-                const initials = getClientInitials(client.name);
+        renderAllIcons(galleryGrid);
 
-                return `
-                    <article class="client-card">
-                        <div class="client-logo-box">
-                            <img
-                                src="${client.logo}"
-                                alt="${client.name}"
-                                loading="lazy"
-                                onerror="this.style.display='none'; this.nextElementSibling.style.display='grid';"
-                            >
+        const videos = galleryGrid.querySelectorAll("video");
 
-                            <span class="client-fallback">${initials}</span>
+        videos.forEach((video) => {
+            video.muted = true;
+            video.loop = true;
+            video.playsInline = true;
+
+            video.addEventListener("error", () => {
+                const card = video.closest(".gallery-card");
+                const mediaFrame = video.closest(".gallery-media-frame");
+
+                if (card && mediaFrame) {
+                    card.classList.remove("gallery-card-video");
+                    card.classList.add("gallery-card-icon");
+
+                    mediaFrame.innerHTML = `
+                        <div class="gallery-icon-media">
+                            <span class="gallery-icon-bg"></span>
+                            <span class="gallery-main-icon svg-icon" data-icon="water"></span>
                         </div>
+                    `;
 
-                        <h3>${client.name}</h3>
-                        <p>${client.description}</p>
-                    </article>
-                `;
-            })
-            .join("");
+                    renderAllIcons(card);
+                }
+            });
+
+            const playPromise = video.play();
+
+            if (playPromise !== undefined) {
+                playPromise.catch(() => {
+                    video.setAttribute("controls", "controls");
+                });
+            }
+        });
+    };
+
+    /* =========================
+       CONTACTO / WHATSAPP
+    ========================= */
+
+    const contactForm = document.getElementById("contactForm");
+
+    const openWhatsApp = (message) => {
+        window.open(getWhatsAppUrl(message), "_blank", "noopener,noreferrer");
+    };
+
+    document.addEventListener("click", (event) => {
+        const serviceButton = event.target.closest("[data-service-contact]");
+
+        if (!serviceButton) return;
+
+        const serviceName = serviceButton.dataset.serviceContact;
+        const message = `Hola, quiero solicitar información sobre el servicio de ${serviceName} de Clean Water Updated S.A.S.`;
+
+        openWhatsApp(message);
+    });
+
+    if (contactForm) {
+        contactForm.addEventListener("submit", (event) => {
+            event.preventDefault();
+
+            const name = document.getElementById("name")?.value.trim() || "";
+            const phone = document.getElementById("phone")?.value.trim() || "";
+            const email = document.getElementById("email")?.value.trim() || "";
+            const service = document.getElementById("service")?.value.trim() || "";
+            const message = document.getElementById("message")?.value.trim() || "";
+
+            const whatsappMessage = [
+                "Hola, quiero solicitar una cotización con Clean Water Updated S.A.S.",
+                "",
+                `Nombre: ${name}`,
+                `Teléfono: ${phone}`,
+                `Correo: ${email}`,
+                `Servicio de interés: ${service}`,
+                "",
+                `Mensaje: ${message || "No aplica"}`
+            ].join("\n");
+
+            openWhatsApp(whatsappMessage);
+        });
     }
 
-    function renderGallery() {
-        const galleryGrid = document.getElementById("galleryGrid");
+    /* =========================
+       BOTÓN VOLVER ARRIBA
+    ========================= */
 
-        if (!galleryGrid || typeof cleanWaterData === "undefined") return;
+    const backToTop = document.getElementById("backToTop");
 
-        galleryGrid.innerHTML = cleanWaterData.gallery
-            .map((item) => {
-                return `
-                    <article class="gallery-card">
-                        <img 
-                            src="${item.image}" 
-                            alt="${item.title}" 
-                            loading="lazy"
-                        >
+    if (backToTop) {
+        window.addEventListener("scroll", () => {
+            const shouldShow = window.scrollY > 400;
+            backToTop.classList.toggle("show", shouldShow);
+        });
 
-                        <div class="gallery-overlay">
-                            <span>${item.category}</span>
-                            <h3>${item.title}</h3>
-                        </div>
-                    </article>
-                `;
-            })
-            .join("");
+        backToTop.addEventListener("click", () => {
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
+        });
     }
 
-    function handleContactForm(event) {
-        event.preventDefault();
+    /* =========================
+       INICIALIZACIÓN
+    ========================= */
 
-        const name = document.getElementById("name").value.trim();
-        const phone = document.getElementById("phone").value.trim();
-        const email = document.getElementById("email").value.trim();
-        const service = document.getElementById("service").value.trim();
-        const message = document.getElementById("message").value.trim();
+    renderHero();
+    renderServices();
+    renderHomeCarousel();
+    renderEnvironment();
+    renderClients();
+    renderGallery();
+    renderAllIcons();
 
-        if (!name || !phone || !email || !service) {
-            alert("Por favor completa los campos obligatorios.");
-            return;
-        }
-
-        const whatsappNumber = "573219648702";
-
-        const whatsappMessage = `
-Hola, quiero solicitar una cotización con Clean Water Updated S.A.S.
-
-Nombre: ${name}
-Teléfono: ${phone}
-Correo: ${email}
-Servicio de interés: ${service}
-Mensaje: ${message || "No especificado"}
-        `;
-
-        const encodedMessage = encodeURIComponent(whatsappMessage);
-
-        window.open(
-            `https://wa.me/${whatsappNumber}?text=${encodedMessage}`,
-            "_blank"
-        );
-
-        event.target.reset();
-    }
-
-    function getClientInitials(name) {
-        const cleanName = name
-            .replace("Centro Empresarial", "")
-            .replace("S.A.", "")
-            .replace("S.A.S.", "")
-            .replace(/\./g, "")
-            .trim();
-
-        const words = cleanName
-            .split(" ")
-            .filter(Boolean);
-
-        if (words.length === 1) {
-            return words[0].substring(0, 2).toUpperCase();
-        }
-
-        return words
-            .slice(0, 2)
-            .map((word) => word[0])
-            .join("")
-            .toUpperCase();
-    }
-
-    function getEnvironmentalIcon(index) {
-        const icons = [
-            "water",
-            "leaf",
-            "leaf",
-            "briefcase",
-            "recycle",
-            "shield"
-        ];
-
-        return icons[index] || "check";
-    }
-
-    function getIcon(iconName) {
-        if (typeof cwIcon === "function") {
-            return cwIcon(iconName);
-        }
-
-        return "";
-    }
+    const initialView = window.location.hash.replace("#", "") || "inicio";
+    setActiveView(initialView);
 });
